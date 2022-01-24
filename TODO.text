@@ -1,0 +1,6 @@
+What to do next:
+-Conditionally render index.html if session has a user_id logged into the page.
+
+TO DO______________
+-Login route -> bcrypt
+-Other item models
