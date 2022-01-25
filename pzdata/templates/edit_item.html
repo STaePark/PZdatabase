@@ -12,55 +12,73 @@
     <title>PZ Items</title>
 </head>
 <body>
-    <h1>Edit Item</h1>
-    <form action="/edit_item/{{item.id}}/update" method="POST">
-        {% csrf_token %}
+    <div id="newItemContainer">
+        <h1 id="headerMessage">Edit Item</h1>
+        <form action="/edit_item/{{item.id}}/update" method="POST">
+            {% csrf_token %}
+            <div id="formContainer">
+                <div class="formElement">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" value="{{item.name}}">
+                </div>
+                <div class="formElement">
+                    <label for="image">Image name: </label>
+                    <input type="text" name="image" value="{{item.image}}">
+                </div>
+                <div class="formElement">
+                    <label for="perishable">Perishable: </label>
+                    {% if item.perishable %}
+                    <select name="perishable">
+                        <option [ngValue]="True" selected>True</option>
+                        <option [ngValue]="False">False</option>
+                    </select>
+                    {% else %}
+                    <select name="perishable">
+                        <option [ngValue]="True">True</option>
+                        <option [ngValue]="False" selected>False</option>
+                    </select>
+                    {% endif %}
+                </div>
+                <div class="formElement">
+                    <label for="weight">Weight: </label>
+                    <input type="number" step="0.01" name="weight" value="{{item.weight}}">
+                </div>
+                <div class="formElement">
+                    <label for="hunger">Hunger: </label>
+                    <input type="number" name="hunger" value="{{item.hunger}}">
+                </div>
+                <div class="formElement">
+                    <label for="thirst">Thirst: </label>
+                    <input type="number" name="thirst" value="{{item.thirst}}">
+                </div>
+                <div class="formElement">
+                    <label for="boredom">Boredom: </label>
+                    <input type="number" name="boredom" value="{{item.boredom}}">
+                </div>
+                <div class="formElement">
+                    <label for="unhappiness">Unhappiness: </label>
+                    <input type="number" name="unhappiness" value="{{item.unhappiness}}">
+                </div>
+                <div class="formElement">
+                    <label for="description">Description: </label>
+                    <textarea id="description" name="description">{{item.description}}</textarea>
+                </div>
+        
+                <input id="addBtn" type="submit" value="Update">
+            </div>
+            
+            
+        </form>
         <div>
-            <label for="name">Name: </label>
-            <input type="text" name="name" value="{{item.name}}">
+            {% if messages %}
+            <ul>
+                {% for message in messages%}
+                    <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
-        <div>
-            <label for="perishable">Perishable: </label>
-            <select name="perishable" value="{{item.perishable}}">
-                <option [ngValue]="True">True</option>
-                <option [ngValue]="False">False</option>
-            </select>
-        </div>
-        <div>
-            <label for="weight">Weight: </label>
-            <input type="number" step="0.01" name="weight" value="{{item.weight}}">
-        </div>
-        <div>
-            <label for="hunger">Hunger: </label>
-            <input type="number" name="hunger" value="{{item.hunger}}">
-        </div>
-        <div>
-            <label for="thirst">Thirst: </label>
-            <input type="number" name="thirst" value="{{item.thirst}}">
-        </div>
-        <div>
-            <label for="boredom">Boredom: </label>
-            <input type="number" name="boredom" value="{{item.boredom}}">
-        </div>
-        <div>
-            <label for="unhappiness">Unhappiness: </label>
-            <input type="number" name="unhappiness" value="{{item.unhappiness}}">
-        </div>
-        <div>
-            <label for="description">Description: </label>
-            <input type="textarea" name="description" value="{{item.description}}">
-        </div>
-
-        <input type="submit" value="Update">
-    </form>
-    <div>
-        {% if messages %}
-        <ul>
-            {% for message in messages%}
-                <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
     </div>
+    
 </body>
 </html>

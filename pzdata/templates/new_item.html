@@ -12,55 +12,65 @@
     <title>PZ Items</title>
 </head>
 <body>
-    <h1>Add New Item</h1>
-    <form action="/new_item/create" method="POST">
-        {% csrf_token %}
+    <div id="newItemContainer">
+        <h1 id="headerMessage">Add New Item</h1>
+        <form action="/new_item/create" method="POST">
+            {% csrf_token %}
+            <div id="formContainer">
+                <div class="formElement">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name">
+                </div>
+                <div class="formElement">
+                    <label for="image">Image name: </label>
+                    <input type="text" name="image">
+                </div>
+                <div class="formElement">
+                    <label for="perishable">Perishable: </label>
+                    <select name="perishable">
+                        <option [ngValue]="True">True</option>
+                        <option [ngValue]="False">False</option>
+                    </select>
+                </div>
+                <div class="formElement">
+                    <label for="weight">Weight: </label>
+                    <input type="number" step="0.01" name="weight">
+                </div>
+                <div class="formElement">
+                    <label for="hunger">Hunger: </label>
+                    <input type="number" name="hunger">
+                </div>
+                <div class="formElement">
+                    <label for="thirst">Thirst: </label>
+                    <input type="number" name="thirst">
+                </div>
+                <div class="formElement">
+                    <label for="boredom">Boredom: </label>
+                    <input type="number" name="boredom">
+                </div>
+                <div class="formElement">
+                    <label for="unhappiness">Unhappiness: </label>
+                    <input type="number" name="unhappiness">
+                </div>
+                <div class="formElement">
+                    <label for="description">Description: </label>
+                    <textarea id="description" name="description">{{item.description}}</textarea>
+                </div>
+            </div>
+            
+    
+            <input id="addBtn" type="submit" value="Add Item">
+        </form>
         <div>
-            <label for="name">Name: </label>
-            <input type="text" name="name">
+            {% if messages %}
+            <ul>
+                {% for message in messages%}
+                    <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
-        <div>
-            <label for="perishable">Perishable: </label>
-            <select name="perishable">
-                <option [ngValue]="True">True</option>
-                <option [ngValue]="False">False</option>
-            </select>
-        </div>
-        <div>
-            <label for="weight">Weight: </label>
-            <input type="number" step="0.01" name="weight">
-        </div>
-        <div>
-            <label for="hunger">Hunger: </label>
-            <input type="number" name="hunger">
-        </div>
-        <div>
-            <label for="thirst">Thirst: </label>
-            <input type="number" name="thirst">
-        </div>
-        <div>
-            <label for="boredom">Boredom: </label>
-            <input type="number" name="boredom">
-        </div>
-        <div>
-            <label for="unhappiness">Unhappiness: </label>
-            <input type="number" name="unhappiness">
-        </div>
-        <div>
-            <label for="description">Description: </label>
-            <input type="textarea" name="description">
-        </div>
-
-        <input type="submit" value="Add">
-    </form>
-    <div>
-        {% if messages %}
-        <ul>
-            {% for message in messages%}
-                <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
     </div>
+    
 </body>
 </html>

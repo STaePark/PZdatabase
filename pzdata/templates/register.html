@@ -12,32 +12,37 @@
     <title>Registration Page</title>
 </head>
 <body>
-    <h1>Welcome, new user! Please fill out the registration form.</h1>
-    <form action="/register/create" method="POST">
-        {% csrf_token %}
+    <div id="registerContainer">
+        <h1 id="headerMessage">Welcome, new user! Please fill out the registration form.</h1>
+        
+        <form action="/register/create" method="POST">
+            {% csrf_token %}
+            <div id="formContainer">
+                <div class="formElement">
+                    <label for="username">Username: </label>
+                    <input type="text" name="username">
+                </div>
+                <div class="formElement">
+                    <label for="password">Password: </label>
+                    <input type="text" name="password">
+                </div>
+                <div class="formElement">
+                    <label for="confirmPassword">Confirm Password: </label>
+                    <input type="text" name="confirmPassword">
+                </div>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
         <div>
-            <label for="username">Username: </label>
-            <input type="text" name="username">
+            {% if messages %}
+            <ul>
+                {% for message in messages%}
+                    <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
-        <div>
-            <label for="password">Password: </label>
-            <input type="text" name="password">
-        </div>
-        <div>
-            <label for="confirmPassword">Confirm Password: </label>
-            <input type="text" name="confirmPassword">
-        </div>
-
-        <input type="submit" value="Submit">
-    </form>
-    <div>
-        {% if messages %}
-        <ul>
-            {% for message in messages%}
-                <li {% if messages.tags %} class="{{ messages.tags }}""{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
     </div>
+    
 </body>
 </html>

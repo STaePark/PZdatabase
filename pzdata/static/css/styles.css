@@ -5,6 +5,13 @@
     color:whitesmoke;
     font-family: sans-serif;
 }
+a{
+    padding: 6px;
+    border-radius: 5px;
+    color: white;
+    background-color: #28303F;
+    text-decoration: none
+}
 ul {
     margin: 0;
     padding: 0;
@@ -22,7 +29,7 @@ body{
     background-color: #12161E;
 }
 #headerContainer{
-    height: 130px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,16 +43,33 @@ body{
 }
 #loginArea{
     width:400px;
-    height: 100px;
+    height: 140px;
 }
     #loginBtn{
         margin-left: 35px;
-        padding: 4px;
+        margin-top: 8px;
+        padding: 4px 6px 4px 6px;
+        border:none;
         border-radius: 5px;
         background-color: #28303F;
     }
+        #loginBtn:hover{
+            color: white;
+            background-color: #12161E;
+        }
+    #registerBtn{
+        padding: 8px;
+        border-radius: 5px;
+        color: white;
+        background-color: #28303F;
+        text-decoration: none
+    }
+        #registerBtn:hover{
+            color: white;
+            background-color: #12161E;
+        }
     #loginArea form div{
-        padding: 2px;
+        padding: 4px;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -56,11 +80,14 @@ body{
     
 }
 #logoutBtn{
-    flex: 10;
+    padding: 10px;
+    margin-right: 20px;
 }
-
+    #logoutBtn:hover{
+        color: white;
+        background-color: #12161E;
+    }
 #itemsContainer{
-    outline: red 2px solid;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -89,7 +116,7 @@ body{
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    .itemsBoxCol:first-child :first-child{
+    .itemsBoxCol:first-child :first-child:not(.itemLink){
         font-weight: bold;
         background-color: grey;
         border-top-left-radius: 5px;
@@ -103,6 +130,18 @@ body{
         background-color: grey;
         border-top-right-radius: 5px;
     }
-#itemOptions a{
-    padding: 0px 10px 0px 0px;
+.itemLink{
+    font-weight: bold;
+    background-color: transparent;
 }
+    .itemLink:hover{
+        color:white;
+    }
+#itemOptions a{
+    padding: 10px;
+    margin: 10px;
+}
+    #itemOptions a:hover{
+        color:white;
+        background-color: #12161E;
+    }

@@ -19,10 +19,10 @@
         {% if this_user != None %}
             {% if this_user.isEditor %}
             <h1 class="headerElement"> Welcome, Editor {{this_user.username}}</h1>
-            <a class="logoutBtn" href="/logout">Logout</a>
+            <a id="logoutBtn" href="/logout">Logout</a>
             {% else %}
             <h1 class="headerElement"> Welcome, {{this_user.username}}</h1>
-            <a class="logoutBtn" href="/logout">Logout</a>
+            <a id="logoutBtn" href="/logout">Logout</a>
             {% endif %}
         {% else %}
         <div id="loginArea" class="headerElement">
@@ -38,7 +38,9 @@
                 </div>
         
                 <input id="loginBtn" type="submit" value="Login">
+                <a id="registerBtn" href="register">Register</a>
             </form>
+            
             <div>
                 {% if messages %}
                 <ul>
@@ -67,7 +69,7 @@
             <ul class="itemsBoxCol">
                 <li><br></li>
                 {% for favorite in favorites %}
-                    <li><a href="unfavorite_food/{{favorite.id}}">Unfavorite</a></li>
+                    <li id="itemOptions"><a href="unfavorite_food/{{favorite.id}}">Unfavorite</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -78,7 +80,7 @@
             <ul class="itemsBoxCol">
                 <li>Foods</li>
                 {% for food in whitelist %}
-                    <li>{{food.name}}</li>
+                    <li><a class="itemLink"href="item/{{food.id}}">{{food.name}}</a></li>
                 {% endfor %}
             </ul>
             {% if this_user != None %}
@@ -89,6 +91,7 @@
                         <a href="favorite_food/{{food.id}}">Favorite</a>
                         {% if this_user.isEditor %}
                         <a href="edit_item/{{food.id}}">Edit</a>
+                        <a href="delete_item/{{food.id}}">Delete</a>
                         {% endif %}
                     </li>
                 {% endfor %}

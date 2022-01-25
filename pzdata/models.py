@@ -20,7 +20,7 @@ class UserManager(models.Manager):
     def login_validator(self, postData):
         errors = {}
         if len(User.objects.filter(username = postData['loginUsername'])) < 1:
-            errors['noUser'] = "Username does not exist"
+            errors['noUser'] = "Account does not exist!"
         else:
             input_user = User.objects.filter(username = postData['loginUsername'])[0]
 
@@ -48,8 +48,18 @@ class FoodManager(models.Manager):
         errors = {}
         if len(postData['name']) < 3:
             errors['name'] = "Names should be longer than 2 characters!"
-        for user in User.objects.all():
-            if user.username == postData['name']:
+        for food in Food.objects.all():
+            if food.name == postData['name']:
+                errors['name'] = "This item already exists!"
+                break
+        return errors
+    def food_update_validator(self, postData, item_id):
+        errors = {}
+        if len(postData['name']) < 3:
+            errors['name'] = "Names should be longer than 2 characters!"
+        foods = Food.objects.exclude(id=item_id)
+        for food in foods:
+            if food.name == postData['name']:
                 errors['name'] = "This item already exists!"
                 break
         return errors

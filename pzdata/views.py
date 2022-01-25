@@ -57,12 +57,18 @@ def createUser(request):
         request.session['user_id'] = new_user.id
         return redirect('/')
 
+def item_data(request, item_id):
+    context = {
+        "item": Food.objects.get(id=item_id)
+    }
+    return render(request, "item.html", context)
+
 def new_item(request):
     return render(request, "new_item.html")
 
 def new_item_create(request):
     if request.method != "POST":
-        return redirect('/new-item')
+        return redirect('/new_item')
     errors = Food.objects.food_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -70,7 +76,7 @@ def new_item_create(request):
         return redirect('/new_item')
     else:
         name=request.POST['name']
-        image=''
+        image=request.POST['image']
         perishable=request.POST['perishable']
         weight=request.POST['weight']
         hunger=request.POST['hunger']
@@ -94,17 +100,17 @@ def update_item(request, item_id):
     if 'user_id' not in request.session:
         return redirect('/')
     if request.method != "POST":
-        return redirect('/new-item')
-    errors = Food.objects.food_validator(request.POST)
+        return redirect('/new_item')
+    errors = Food.objects.food_update_validator(request.POST, item_id)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/edit_item')
+        return redirect(f'/edit_item/{item_id}')
     else:
         updated_item = Food.objects.get(id=item_id)
 
         updated_item.name=request.POST['name']
-        updated_item.image=''
+        updated_item.image=request.POST['image']
         updated_item.perishable=request.POST['perishable']
         updated_item.weight=request.POST['weight']
         updated_item.hunger=request.POST['hunger']
@@ -115,7 +121,12 @@ def update_item(request, item_id):
         updated_item.save()
         return redirect('/')
 
-
+def delete_item(request, item_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    
+    Food.objects.get(id=item_id).delete()
+    return redirect('/')
 
 
 def login(request):

@@ -1,6 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=OpenSans&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    color:whitesmoke;
+    font-family: sans-serif;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    }
+li{
+    list-style-type: none;
+    padding: 15px 20px 15px 20px;
+}
+input{
+    background-color: #28303F;
+}
 body{
     margin: 10px;
     padding: 10px;
-    outline: black 2px solid;
-    background-color:gray;
+    background-color: #12161E;
+    display: flex;
+    justify-content: center;
+}
+#registerContainer{
+    height: 400px;
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #172135;
+    border: #212B3F 1px solid;
+    border-radius: 10px;
+}
+#headerMessage{
+    padding-top: 20px;
+}
+#formContainer{
+    width: 400px;
+}
+.formElement{
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
 }
